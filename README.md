@@ -130,6 +130,53 @@ Example (use quotes unless using NULL):
 
     searching_text = "ICD-10-CM" 
 
+## Executing the Code
+
+<ins> Step 1: </ins> Run the code that builds the macro.  
+
+<ins> Step 2: </ins> Make sure you have the following:
+
+ 1.	Code_Mapping_GitHub.xlsx (provided to you) and the path to the file location.
+ 2.	Medical coded data input file (or the provided sample data ‘fake_data.csv, or fake_data.sas7bdat) and the path to the file’s location. 
+ 3.	Ensure your input file data structure is conducive to the algorithm.
+   
+If your data contains variables/columns with the medical code and the medical code system as one string, you will have to create separate variables for each. See illustration below. 
+
+Original data structure ->  incompatible with this algorithm. 
+| ID |	SETTING	| MEDICAL_CODE |
+| ------ | ------ | ------ |
+| 123A |	Inpatient |	SNOMED: 665002710 |
+| 123B |	Emergency	| RXNORM: 12345 |
+| 123C |	  | ICD-10-CM: F11.5 |
+
+Transformed data -> compatible with this algorithm.
+| ID	| SETTING	| MEDICAL_CODE |	CODE_SYSTEM |
+| ------ | ------ | ------ | ------ |
+| 123A |	Inpatient |	SNOMED |	665002710 |
+| 123B |	Emergency |	RXNORM |	12345 |
+| 123C |   | ICD-10-CM |	F11.5 |
+
+
+<ins> Step 3: </ins> Specify your parameters into the ‘create_output_table’ macro and execute 
+
+The next blocks of code provide examples of executing the 'create_output_table' macro using various parameter settings. Using your input datafile and the provided code mapping file, you can specify the macro parameters and execute it to generate the final output table.
+
+Example 1: Using an external SAS input file, and using specified code_systems:	
+
+    %create_output_table(
+	    code_mapping_file = C:\Insert\thepathto\the\Code_Mapping_GitHub,
+	    dataType= SAS, 
+	    inputPath= \\cdc.gov\private\M729\qlu7\PCORTF, 
+	    inputFileName = fake_data,
+	    columns_to_keep = ID VisitType CodeType,
+	    output_table_name = example1_results_file,
+	    code = Code,
+	    code_system_name = NULL,
+	    codesys_name = CodeType,
+	    searching_text = "ICD-10-CM" 
+    );
+
+
 
 ## Public Domain Standard Notice
 This repository constitutes a work of the United States Government and is not
