@@ -1,26 +1,60 @@
-# CDCgov GitHub Organization Open Source Project Template
+# Guide to the Medical Code Component <p> of the NCHS Stimulant and Opioid Use Algorithm
 
-**Template for clearance: This project serves as a template to aid projects in starting up and moving through clearance procedures. To start, create a new repository and implement the required [open practices](open_practices.md), train on and agree to adhere to the organization's [rules of behavior](rules_of_behavior.md), and [send a request through the create repo form](https://forms.office.com/Pages/ResponsePage.aspx?id=aQjnnNtg_USr6NJ2cHf8j44WSiOI6uNOvdWse4I-C2NUNk43NzMwODJTRzA4NFpCUk1RRU83RTFNVi4u) using language from this template as a Guide.**
+**Author: Minchan (Daisy) Shi**
 
-**General disclaimer** This repository was created for use by CDC programs to collaborate on public health related projects in support of the [CDC mission](https://www.cdc.gov/about/organization/mission.htm).  GitHub is not hosted by the CDC, but is a third party website used by CDC and its partners to share information and collaborate on software. CDC use of GitHub does not imply an endorsement of any one particular service, product, or enterprise. 
+**sse6@cdc.gov**
 
-## Access Request, Repo Creation Request
-
-* [CDC GitHub Open Project Request Form](https://forms.office.com/Pages/ResponsePage.aspx?id=aQjnnNtg_USr6NJ2cHf8j44WSiOI6uNOvdWse4I-C2NUNk43NzMwODJTRzA4NFpCUk1RRU83RTFNVi4u) _[Requires a CDC Office365 login, if you do not have a CDC Office365 please ask a friend who does to submit the request on your behalf. If you're looking for access to the CDCEnt private organization, please use the [GitHub Enterprise Cloud Access Request form](https://forms.office.com/Pages/ResponsePage.aspx?id=aQjnnNtg_USr6NJ2cHf8j44WSiOI6uNOvdWse4I-C2NUQjVJVDlKS1c0SlhQSUxLNVBaOEZCNUczVS4u).]_
-
-## Related documents
-
-* [Open Practices](open_practices.md)
-* [Rules of Behavior](rules_of_behavior.md)
-* [Thanks and Acknowledgements](thanks.md)
-* [Disclaimer](DISCLAIMER.md)
-* [Contribution Notice](CONTRIBUTING.md)
-* [Code of Conduct](code-of-conduct.md)
+**Edited: November 14, 2024**
 
 ## Overview
 
-Describe the purpose of your project. Add additional sections as necessary to help collaborators and potential collaborators understand and use your project.
-  
+<ins> Background </ins>
+
+The code contained in this repository is part of a project titled “Utilizing Natural Language Processing and Machine Learning to Enhance the Identification of Stimulant and Opioid-Involved Health Outcomes in the National Hospital Care Survey,” which was funded by the Office of the Secretary – Patient-Centered Outcomes Research Trust Fund in the 2023 fiscal year. This work was carried out by the National Center for Health Statistics (NCHS) using data from the 2020 National Hospital Care Survey. The full algorithm has two primary components: a natural language processing component and a medical code-based component. This R code covers the medical code-based component.
+
+This algorithm uses medical codes (for example, diagnoses or procedure codes) to identify hospital encounters involving the non-therapeutic use of stimulants and opioids. Non-therapeutic use includes the use of illicit substances (stimulants or opioids), misuse of prescriptions, or the unspecified non-therapeutic use of substances. The algorithm is designed to analyze data in table form and produce an output file containing variables related to non-therapeutic stimulant use, non-therapeutic opioid use, and the co-occurrence (a proxy for co-use) of these two types of use. 
+
+The natural language processing component for this algorithm designed to analyze clinical notes is in the following repository:
+
+  * https://github.com/CDCgov/stimulant_opioid_algorithm_clinical_notes
+
+<ins>Related repositories:</ins>
+
+The stimulant algorithm is the third in a series of related substance-use-related algorithms. For your reference, these algorithms can be found in the following repositories.
+
+  * [ ] Algorithm to detect opioid use, selected mental health issues, and substance use disorders in medical codes: 
+    * https://github.com/CDCgov/Opioid_SUD_MHI_MedCodes
+
+  * [ ] Algorithms to detect opioid use, selected mental health issues, and substance use disorders in clinical notes: 
+    * https://github.com/CDCgov/Opioid_Involvement_NLP
+    * https://github.com/CDCgov/SUD_MHI_NLP
+
+<ins>Usage </ins>
+
+The ‘create_output_table’ macro is the key component of this algorithm. It generates an output table of medical records identified for having stimulant or opioid use involvement based on mapping rules defined in an external Excel file ("Code_Mapping_GitHub.xlsx") called in the macro. The Excel file maps medical codes to different types of stimulant use or opioid use. The macro applies the mapping rules in the Excel file to categorize and filter input data (coded medical data) for patterns of non-therapeutic stimulant use, opioid use, and other related health outcomes; it also derives a variable for co-use based on the detection of both opioid and stimulant use in the same medical record. The macro handles various types of input data (CSV, Excel, SAS, database, or preloaded data). The rest of this readme file provides detailed explanations of each parameter called in the ‘create_output_table’ macro and examples of usage scenarios. 
+
+Depending on the analyst’s needs, the algorithm can be tailored to fit different use cases or augmented to increase applicability. Adjust the examples and details as necessary to match your specific use case. Ensure that your input data includes a column for the code formatted according to the "Code_Mapping_GitHub.xlsx" file. Your code column should match the format specified in that file.
+
+## Macro Parameters
+
+### code_mapping_file
+
+Description: Path to the code mapping Excel file `Code_Mapping_GitHub.xlsx,` which contains medical codes mapped to output variables, and is provided in this repository.  To run the ‘create_output_table’ macro, specify the location (path) where you saved the file. 
+
+Example (do not enclose in quotes):
+
+    code_mapping_file=path_to/Code_Mapping_GitHub.xlsx
+
+### code_system_name
+
+Description: Name of the medical code system to subset the code mapping file by. Users can choose from 'ICD-10-CM', 'HCPCS', 'RXNORM', 'SNOMED', 'LOINC', or NULL (not specifying any code system).
+
+Examples: 
+
+    code_system_name = "ICD-10-CM" (use quotes, unless you entry is NULL)
+    Code_sytem_name= "HCPCS", “ICD-1 0-CM” (more than one system allowed, in quotes, separated by commas)
+
+
 ## Public Domain Standard Notice
 This repository constitutes a work of the United States Government and is not
 subject to domestic copyright protection under 17 USC § 105. This repository is in
