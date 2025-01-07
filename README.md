@@ -88,7 +88,49 @@ Example (separated by spaces, no quotes or commas needed):
 
     columns_to_keep = ID  VisitType 
 
-    
+### output_table_name  
+
+Description: Name of your output file. The output is only available in SAS format. 
+
+Example: 
+
+    output_table_name= results_file
+
+### code
+
+Description: Name of the column name (variable) containing medical codes in the input data (coded medical record data). Only one variable or column name is allowed. 
+
+Example (this example is the variable name in the sample input data provided): 
+
+    Code= Code 
+
+### codesys_name  (optional)
+
+Description: The column name (variable) in your input data set, containing the names of the medical code system types for the medical codes in variable containing medical codes (parameter ‘code’). Allows user to subset the input data by a specific medical code system type. Enter NULL if you do not want to filter rows of the input data based on the specified condition, or if the parameter ‘code_system_name’ is not set to NULL. 
+
+Example (this example is a variable in the sample input data provided): 
+
+    codesys_name =  CodeType  
+
+Note: The codes for the included code systems are intended to search for the following types of information:
+
+| Code System |	Information Type |
+| ------ | ------ | 
+| ICD-10-CM |	Diagnoses |
+| SNOMED	| Diagnoses |
+| HCPCS |	Procedures |
+| RXNORM |	Medications |
+| LOINC |	Labs |
+
+### searching_text (optional)
+
+Description: Subsets rows of the input data based on a specified medical code system type. These are the values in the column name (variable) specified in the 'codesys_name' parameter above. If 'codesys_name' is NULL, then 'searching_text' should also be NULL. Enter NULL if you do not want to filter rows of the input data based on a medical code system, or if the parameter ‘code_system_name’ is NOT set to NULL.
+
+Example (use quotes unless using NULL): 
+
+    searching_text = "ICD-10-CM" 
+
+
 ## Public Domain Standard Notice
 This repository constitutes a work of the United States Government and is not
 subject to domestic copyright protection under 17 USC § 105. This repository is in
