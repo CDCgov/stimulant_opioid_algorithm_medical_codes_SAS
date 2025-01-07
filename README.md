@@ -4,7 +4,7 @@
 
 **sse6@cdc.gov**
 
-**Edited: November 14, 2024**
+**Edited: January 7, 2025**
 
 ## Overview
 
@@ -161,7 +161,8 @@ Transformed data -> compatible with this algorithm.
 
 The next blocks of code provide examples of executing the 'create_output_table' macro using various parameter settings. Using your input datafile and the provided code mapping file, you can specify the macro parameters and execute it to generate the final output table.
 
-Example 1: Using an external SAS input file, and using specified code_systems:	
+
+**Example 1:** Using an external SAS input file, and using specified code_systems:	
 
     %create_output_table(
 	    code_mapping_file = C:\Insert\thepathto\the\Code_Mapping_GitHub,
@@ -175,6 +176,63 @@ Example 1: Using an external SAS input file, and using specified code_systems:
 	    codesys_name = CodeType,
 	    searching_text = "ICD-10-CM" 
     );
+
+**Example 2:**  Using an external CSV input file, and specifying a code_system_name in the mapping  file:
+
+    %create_output_table (
+	    code_mapping_file=C:\Insert\thepathto\the\Code_Mapping_GitHub.xlsx
+	    code_system_name = NULL,
+	    dataType= CSV,
+	    inputPath= C:\Users\Desktop\Github, 
+	    inputFileName = fake_data,
+	    columns_to_keep = ID VisitType,
+	    output_table_name = example2_results_file,
+	    code = Code,
+	    codesys_name = NULL,
+	    searching_text = NULL 
+    );
+
+**Example 3:** Using preloaded_data input file
+
+<ins> Step 1: </ins> Create your datafile directly in SAS or use a SAS file already in the working library.
+
+    data fake_data1;
+	    /*Must specify variable lengths*/
+	    length ID $8. VisitType $10. Code $20. CodeType $20.; 
+	    input ID $ VisitType $ Code $ CodeType $20.;
+	    datalines;
+		123X ED C9046 HCPCS
+		456X ED-to-IP T40694 ICD-10-CM
+		789Y IP F33.9 ICD-10-CM
+		012Y IP F1111 ICD-10-CM
+		254P ED-to-IP F12222 ICD-10-CM
+		835T ED F15220 ICD-10-CM
+		624X IP F18120 ICD-10-CM
+		826P NA G9578 HCPCS
+		426P OP Z915 ICD-10-CM
+		264X IP F419 ICD-10-CM
+		926P ED F419 ICD-10-CM
+		012Y IP F1123 ICD-10-CM
+		913Z OP 372862 RXNORM
+		837w ED 151612 RXNORM
+		787x ED 699449003 SNOMED
+	    ;
+    run;
+
+<ins> Step 2: </ins>  Fill in the parameters in the 'create_output_table' macro. Since the dataset was created in SAS, use "preloaded_data" for the data_type parameter. Execute the macro after filling in the rest of the parameters.
+
+    %create_output_table (
+	    code_mapping_file = C:\Insert\thepathto\the\Code_Mapping_GitHub.xlsx,
+	    code_system_name = NULL ,
+	    dataType= preloaded_data,
+	    inputPath= NULL, 
+	    inputFileName = fake_data,
+	    columns_to_keep = ID VisitType ,
+	    output_table_name = example3_results_file,
+	    code = Code,
+	    codesys_name = NULL ,
+	    searching_text =  NULL
+    );	
 
 
 
@@ -207,8 +265,8 @@ The source code forked from other open source projects will inherit its license.
 ## Privacy Standard Notice
 This repository contains only non-sensitive, publicly available data and
 information. All material and community participation is covered by the
-[Disclaimer](DISCLAIMER.md)
-and [Code of Conduct](code-of-conduct.md).
+[Disclaimer](Disclaimers_And_Licenses/DISCLAIMER.md)
+and [Code of Conduct](Disclaimers_And_Licenses/code-of-conduct.md).
 For more information about CDC's privacy policy, please visit [http://www.cdc.gov/other/privacy.html](https://www.cdc.gov/other/privacy.html).
 
 ## Contributing Standard Notice
