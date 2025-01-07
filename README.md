@@ -54,7 +54,41 @@ Examples:
     code_system_name = "ICD-10-CM" (use quotes, unless you entry is NULL)
     Code_sytem_name= "HCPCS", “ICD-1 0-CM” (more than one system allowed, in quotes, separated by commas)
 
+### dataType
 
+Description: Type of input data. Supported types include  'csv', 'xlsx', 'sas', or 'preloaded_data'.
+
+Example (enter only ONE format): 
+
+    dataType = csv 
+    dataType = xlsx
+
+### inputPath
+
+Description: Path to the folder where the input file (the coded medical data file to be searched) is located.  Provide `NULL` if dataType is 'preloaded_data'.
+
+Examples (path does not need to be in quotes): 
+
+    inputPath = C:\Users\sse6\Desktop\Github   
+    Inputpath= NULL 
+
+### inputFileName
+
+Description: Name of the input file (the coded medical data file to be searched).  
+
+Example (enter your input file. This is the sample file provided): 
+
+    inputFIleName = fake_data 
+
+### columns_to_keep
+
+Description: Columns to include in the output table.
+
+Example (separated by spaces, no quotes or commas needed): 
+
+    columns_to_keep = ID  VisitType 
+
+    
 ## Public Domain Standard Notice
 This repository constitutes a work of the United States Government and is not
 subject to domestic copyright protection under 17 USC § 105. This repository is in
