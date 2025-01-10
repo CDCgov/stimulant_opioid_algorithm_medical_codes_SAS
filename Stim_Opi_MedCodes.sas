@@ -467,13 +467,13 @@ run;
 *Example 1: Using an external SAS input file, and using specified code_systems;	
 %create_output_table(
 	/*Path to the code mapping excel file provided to you*/
-	code_mapping_file = \\filepath\Code_Mapping_GitHub.xlsx,
+	code_mapping_file = C:\Users\username\Downloads\stimulant_opioid_algorithm_medical_codes_SAS-main\stimulant_opioid_algorithm_medical_codes_SAS-main\Code_Mapping_GitHub.xlsx,
 	
 	/*Type of file for your input data (medical record data to be searched).*/ 
 	dataType= SAS, /*Supported types include : "csv", "xlsx", "sas", or "preloaded_data". */
 	
 	/*Path to the location of the input file.  Provide `NULL` if the dataType is "preloaded_data". */
-	inputPath= \\filepath\project\PCORTF, 
+	inputPath= C:\Users\username\Downloads\stimulant_opioid_algorithm_medical_codes_SAS-main\stimulant_opioid_algorithm_medical_codes_SAS-main, 
 	
 	/*Name of the input file */
 	inputFileName = fake_data,
@@ -511,16 +511,16 @@ run;
 	/*Optional: Enter the text name of the medical code type you are interested in. These are the values in the column name
 	 (variable) specified for the 'codesys_name' parameter above. If 'codesys_name' is NULL, then 'searching_text' should 
 	 also be NULL. If you entered a value other than "NULL" for the 'code_system_name' parameter, enter "NULL".*/
-	searching_text = "ICD-10-CM"; /*enter in quotes, enter NULL without quotes*/ 
-   );
+	searching_text = "ICD-10-CM"); /*enter in quotes, enter NULL without quotes*/ 
+
 
 
 *Example 2: Using an external CSV input file, and specifying a code_system_name to use in the mapping file;
 %create_output_table(	
-	code_mapping_file = \\filepath\Code_Mapping_GitHub.xlsx,
+	code_mapping_file = C:\Users\username\Downloads\stimulant_opioid_algorithm_medical_codes_SAS-main\stimulant_opioid_algorithm_medical_codes_SAS-main\Code_Mapping_GitHub.xlsx,
 	code_system_name ="ICD-10-CM",
 	dataType= CSV,
-	inputPath=\\filepath9\project\PCORTF,
+	inputPath= C:\Users\username\Downloads\stimulant_opioid_algorithm_medical_codes_SAS-main\stimulant_opioid_algorithm_medical_codes_SAS-main, 
 	inputFileName = fake_data,
 	columns_to_keep = ID VisitType CodeType ,
 	output_table_name = example2_results_file,
@@ -557,7 +557,7 @@ run;
 /*Step 2: Fill in the parameters in the 'create_output_table' macro. Since the dataset was created in SAS,
  use "preloaded_data" for the data_type parameter. Execute the macro after filling in the parameters*/
 %create_output_table(	
-	code_mapping_file = \\filepath\Code_Mapping_GitHub.xlsx,
+	code_mapping_file = C:\Users\username\Downloads\stimulant_opioid_algorithm_medical_codes_SAS-main\stimulant_opioid_algorithm_medical_codes_SAS-main\Code_Mapping_GitHub.xlsx,
 	code_system_name = NULL,
 	dataType= preloaded_data,
 	inputPath= NULL , /*Enter NULL when using preloaded data*/
