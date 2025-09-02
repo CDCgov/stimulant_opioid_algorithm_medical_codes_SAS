@@ -8,6 +8,8 @@
 
 ## Overview
 
+<ins> Placeholder for Errata <ins>
+
 <ins> Background </ins>
 
 The code contained in this repository is part of a project titled “Utilizing Natural Language Processing and Machine Learning to Enhance the Identification of Stimulant and Opioid-Involved Health Outcomes in the National Hospital Care Survey,” which was funded by the Office of the Secretary – Patient-Centered Outcomes Research Trust Fund in the 2023 fiscal year. This work was carried out by the National Center for Health Statistics (NCHS) using data from the 2020 National Hospital Care Survey. The full algorithm has two primary components: a natural language processing component and a medical code-based component. This R code covers the medical code-based component.
