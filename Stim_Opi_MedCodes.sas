@@ -7,7 +7,7 @@
 
 ## Purpose
 
-# The ‘create_output_table’ macro is the key component of this algorithm. It generates an output table of medical
+# The â€˜create_output_tableâ€™ macro is the key component of this algorithm. It generates an output table of medical
 # records identified for having stimulant or opioid use involvement based on mapping rules defined in an external
 # Excel file ("Code_Mapping_GitHub.xlsx") called in the macro. The Excel file maps medical codes to different types
 # of stimulant use or opioid use. The macro applies the mapping rules in the Excel file to categorize and filter
@@ -20,7 +20,7 @@
 
 ### code_mapping_file
 # **Description:**Path to the code mapping Excel file `Code_Mapping_GitHub.xlsx,` which contains medical codes mapped 
-    to output variables, and is provided in this repository.  To run the ‘create_output_table’ macro, specify the 
+    to output variables, and is provided in this repository.  To run the â€˜create_output_tableâ€™ macro, specify the 
     location (path) where you saved the file under 'code_mapping_file parameter'. 
 # **Example:** "path/to/Code_Mapping_GitHub.xlsx"
 
@@ -57,17 +57,17 @@
 
 ### codesys_name  (optional)
 # **Description:** The column name (variable) in your input data set, containing the names of the medical 
-#   code system types for the medical codes in variable containing medical codes (parameter ‘code’).
+#   code system types for the medical codes in variable containing medical codes (parameter â€˜codeâ€™).
 #   Allows user to subset the input data by a specific medical code system type. Enter NULL if you do not
 #   want to filter rows of the input data based on the specified condition, or if the parameter 
-#   ‘code_system_name’ is not set to NULL. 
+#   â€˜code_system_nameâ€™ is not set to NULL. 
 # **Examples:** codesys_name = CodeType (CodeType is a variable name in your input data).
 
 ### searching_text (optional)
 # **Description: Description: Subsets the input data based on a specified medical code type. These are the
 #   values in the column name (variable) specified in the 'codesys_name' parameter above. If 'codesys_name'
 #   is NULL, then 'searching_text' should also be NULL. Enter NULL if you do not want to filter rows of the
-#   input data based on a medical code system, or if the parameter ‘code_system_name’ is NOT set to NULL.
+#   input data based on a medical code system, or if the parameter â€˜code_system_nameâ€™ is NOT set to NULL.
 # **Example:**searching_text = ICD-10-CM
 
 ###############################################################################################################;
@@ -270,134 +270,134 @@ data output1(compress=yes);
 
  %if &codesys_name = NULL and &searching_text = NULL %then %do;
 	
-	if &code in: (&OPIOID_ANY_CODE_RXNORM1) or &code in: (&OPIOID_ANY_CODE_RXNORM2)
+	if &code in (&OPIOID_ANY_CODE_RXNORM1) or &code in (&OPIOID_ANY_CODE_RXNORM2)
 		THEN OPIOID_ANY_CODE = 1; 
 			else OPIOID_ANY_CODE = 0;
-	if &code in: (&STIM_ANY_CODE) 
+	if &code in (&STIM_ANY_CODE) 
 		THEN STIM_ANY_CODE = 1; 
 			else STIM_ANY_CODE = 0;
-	if &code in: (&DRUGSCREEN_CODE) 
+	if &code in (&DRUGSCREEN_CODE) 
 		THEN DRUGSCREEN_CODE = 1; 
 			else DRUGSCREEN_CODE = 0;
-	if &code in: (&STIM_TX_CODE) 
+	if &code in (&STIM_TX_CODE) 
 		THEN STIM_TX_CODE = 1; 
 			else STIM_TX_CODE = 0;
-	if &code in: (&STIM_NON_TX_UNSP_CODE)
+	if &code in (&STIM_NON_TX_UNSP_CODE)
 		THEN STIM_NON_TX_UNSP_CODE = 1; 
 			else STIM_NON_TX_UNSP_CODE = 0;
-	if &code in: (&TX_METHYLPHENIDATE_CODE) 
+	if &code in (&TX_METHYLPHENIDATE_CODE) 
 		THEN TX_METHYLPHENIDATE_CODE = 1; 
 			else TX_METHYLPHENIDATE_CODE = 0;
-	if &code in: (&TX_DEXTROAMPHETAMINE_CODE) 
+	if &code in (&TX_DEXTROAMPHETAMINE_CODE) 
 		THEN TX_DEXTROAMPHETAMINE_CODE = 1; 
 			else TX_DEXTROAMPHETAMINE_CODE = 0;
-	if &code in: (&TX_AMPHETAMINE_CODE) 
+	if &code in (&TX_AMPHETAMINE_CODE) 
 		THEN TX_AMPHETAMINE_CODE = 1; 
 			else TX_AMPHETAMINE_CODE = 0;
-	if &code in: (&TX_DEXMETHYLPHENIDATE_CODE) 
+	if &code in (&TX_DEXMETHYLPHENIDATE_CODE) 
 		THEN TX_DEXMETHYLPHENIDATE_CODE = 1; 
 			else TX_DEXMETHYLPHENIDATE_CODE = 0;
-	if &code in: (&TX_LISDEXAMFETAMINE_CODE) 
+	if &code in (&TX_LISDEXAMFETAMINE_CODE) 
 		THEN TX_LISDEXAMFETAMINE_CODE = 1; 
 			else TX_LISDEXAMFETAMINE_CODE = 0;
-	if &code in: (&TX_AMPHET_DEXTROAMPHET_CODE) 
+	if &code in (&TX_AMPHET_DEXTROAMPHET_CODE) 
 		THEN TX_AMPHET_DEXTROAMPHET_CODE = 1; 
 			else TX_AMPHET_DEXTROAMPHET_CODE = 0;
-	if &code in: (&STIM_MISUSE_CODE) 
+	if &code in (&STIM_MISUSE_CODE) 
 		THEN STIM_MISUSE_CODE = 1; 
 			else STIM_MISUSE_CODE = 0;
-	if &code in: (&MISUSE_METHYLPHENIDATE_CODE) 
+	if &code in (&MISUSE_METHYLPHENIDATE_CODE) 
 		THEN MISUSE_METHYLPHENIDATE_CODE = 1; 
 			else MISUSE_METHYLPHENIDATE_CODE = 0;
-	if &code in: (&MISUSE_AMPHETAMINE_CODE)
+	if &code in (&MISUSE_AMPHETAMINE_CODE)
 		THEN MISUSE_AMPHETAMINE_CODE = 1; 
 			else MISUSE_AMPHETAMINE_CODE = 0;
-	if &code in: (&STIM_ILLICIT_CODE) 
+	if &code in (&STIM_ILLICIT_CODE) 
 		THEN STIM_ILLICIT_CODE = 1; 
 			else STIM_ILLICIT_CODE = 0;
-	if &code in: (&ILLICIT_COCAINE_CODE) 
+	if &code in (&ILLICIT_COCAINE_CODE) 
 		THEN ILLICIT_COCAINE_CODE = 1; 
 			else ILLICIT_COCAINE_CODE = 0;
-	if &code in: (&ILLICIT_METHAMPHETAMINE_CODE) 
+	if &code in (&ILLICIT_METHAMPHETAMINE_CODE) 
 		THEN ILLICIT_METHAMPHETAMINE_CODE = 1; 
 			else ILLICIT_METHAMPHETAMINE_CODE = 0;
-	if &code in: (&ILLICIT_MDMA_CODE) 
+	if &code in (&ILLICIT_MDMA_CODE) 
 		THEN ILLICIT_MDMA_CODE = 1; 
 			else ILLICIT_MDMA_CODE = 0;
-	if &code in: (&OPIOID_MISUSE_CODE)
+	if &code in (&OPIOID_MISUSE_CODE)
 		THEN OPIOID_MISUSE_CODE = 1; 
 			else OPIOID_MISUSE_CODE = 0;
-	if &code in: (&OPIOID_ILLICIT_CODE) 
+	if &code in (&OPIOID_ILLICIT_CODE) 
 		THEN OPIOID_ILLICIT_CODE = 1; 
 			else OPIOID_ILLICIT_CODE = 0;
-	if &code in: (&OPIOID_NON_TX_UNSP_CODE) 
+	if &code in (&OPIOID_NON_TX_UNSP_CODE) 
 		THEN OPIOID_NON_TX_UNSP_CODE = 1; 
 			else OPIOID_NON_TX_UNSP_CODE = 0;
 
 %end;
 %else %do;
- 	if (&code in: (&OPIOID_ANY_CODE_RXNORM1) AND &codesys_name = &searching_text) 
-		or (&code in: (&OPIOID_ANY_CODE_RXNORM2) AND &codesys_name =&searching_text) 
+ 	if (&code in (&OPIOID_ANY_CODE_RXNORM1) AND &codesys_name = &searching_text) 
+		or (&code in (&OPIOID_ANY_CODE_RXNORM2) AND &codesys_name =&searching_text) 
 		THEN  OPIOID_ANY_CODE=1 ; 
 			else OPIOID_ANY_CODE=0 ; 
-	if &code  in: (&STIM_ANY_CODE) AND &codesys_name = &searching_text  
+	if &code  in (&STIM_ANY_CODE) AND &codesys_name = &searching_text  
 		THEN  STIM_ANY_CODE=1; 	
  			else STIM_ANY_CODE=0 ;
-	if &code  in: (&DRUGSCREEN_CODE) AND &codesys_name =&searching_text
+	if &code  in (&DRUGSCREEN_CODE) AND &codesys_name =&searching_text
 		THEN  DRUGSCREEN_CODE=1 ; 
 			else DRUGSCREEN_CODE=0 ;
-	if &code  in: (&STIM_TX_CODE) AND &codesys_name =&searching_text
+	if &code  in (&STIM_TX_CODE) AND &codesys_name =&searching_text
 		THEN  STIM_TX_CODE=1 ;
 			else STIM_TX_CODE=0 ;
-	if &code  in: (&STIM_NON_TX_UNSP_CODE) AND &codesys_name =&searching_text
+	if &code  in (&STIM_NON_TX_UNSP_CODE) AND &codesys_name =&searching_text
 		THEN  STIM_NON_TX_UNSP_CODE=1 ; 
 			else STIM_NON_TX_UNSP_CODE=0 ;
-	if &code  in: (&TX_METHYLPHENIDATE_CODE) AND &codesys_name = &searching_text
+	if &code  in (&TX_METHYLPHENIDATE_CODE) AND &codesys_name = &searching_text
 		THEN  TX_METHYLPHENIDATE_CODE=1 ; 
 			else TX_METHYLPHENIDATE_CODE=0 ;
-	if &code  in: (&TX_DEXTROAMPHETAMINE_CODE) AND &codesys_name =&searching_text
+	if &code  in (&TX_DEXTROAMPHETAMINE_CODE) AND &codesys_name =&searching_text
 		THEN  TX_DEXTROAMPHETAMINE_CODE=1 ; 
 			else TX_DEXTROAMPHETAMINE_CODE=0 ;
-	if &code  in: (&TX_AMPHETAMINE_CODE) AND &codesys_name =&searching_text
+	if &code  in (&TX_AMPHETAMINE_CODE) AND &codesys_name =&searching_text
 		THEN  TX_AMPHETAMINE_CODE=1; 
 			else TX_AMPHETAMINE_CODE=0 ;
-	if &code  in: (&TX_DEXMETHYLPHENIDATE_CODE) AND &codesys_name = &searching_text
+	if &code  in (&TX_DEXMETHYLPHENIDATE_CODE) AND &codesys_name = &searching_text
 		THEN  TX_DEXMETHYLPHENIDATE_CODE=1 ;
 			else TX_DEXMETHYLPHENIDATE_CODE=0 ;
-	if &code  in: (&TX_LISDEXAMFETAMINE_CODE) AND &codesys_name =&searching_text
+	if &code  in (&TX_LISDEXAMFETAMINE_CODE) AND &codesys_name =&searching_text
 		THEN  TX_LISDEXAMFETAMINE_CODE=1 ; 
 			else TX_LISDEXAMFETAMINE_CODE=0 ;
-	if &code  in: (&TX_AMPHET_DEXTROAMPHET_CODE) AND &codesys_name = &searching_text
+	if &code  in (&TX_AMPHET_DEXTROAMPHET_CODE) AND &codesys_name = &searching_text
 		THEN  TX_AMPHET_DEXTROAMPHET_CODE=1 ; 
 			else TX_AMPHET_DEXTROAMPHET_CODE=0 ;
-	if &code  in: (&STIM_MISUSE_CODE) AND &codesys_name =&searching_text 
+	if &code  in (&STIM_MISUSE_CODE) AND &codesys_name =&searching_text 
 		THEN  STIM_MISUSE_CODE=1 ;
 			else STIM_MISUSE_CODE=0 ;
-	if &code  in: (&MISUSE_METHYLPHENIDATE_CODE) AND &codesys_name =&searching_text
+	if &code  in (&MISUSE_METHYLPHENIDATE_CODE) AND &codesys_name =&searching_text
 		THEN  MISUSE_METHYLPHENIDATE_CODE=1 ; 
 			else MISUSE_METHYLPHENIDATE_CODE=0 ;
-	if &code  in: (&MISUSE_AMPHETAMINE_CODE) AND &codesys_name =&searching_text
+	if &code  in (&MISUSE_AMPHETAMINE_CODE) AND &codesys_name =&searching_text
 		THEN  MISUSE_AMPHETAMINE_CODE=1 ; 
 			else MISUSE_AMPHETAMINE_CODE=0 ;
-	if &code  in: (&STIM_ILLICIT_CODE) AND &codesys_name =&searching_text  
+	if &code  in (&STIM_ILLICIT_CODE) AND &codesys_name =&searching_text  
 		THEN  STIM_ILLICIT_CODE=1 ; 
 			else STIM_ILLICIT_CODE=0 ;
-	if &code  in: (&ILLICIT_COCAINE_CODE) AND &codesys_name = &searching_text
+	if &code  in (&ILLICIT_COCAINE_CODE) AND &codesys_name = &searching_text
 		THEN  ILLICIT_COCAINE_CODE=1 ; 
 			else ILLICIT_COCAINE_CODE=0 ;
-	if &code  in: (&ILLICIT_METHAMPHETAMINE_CODE) AND &codesys_name =&searching_text
+	if &code  in (&ILLICIT_METHAMPHETAMINE_CODE) AND &codesys_name =&searching_text
 		THEN  ILLICIT_METHAMPHETAMINE_CODE=1 ; 
 			else ILLICIT_METHAMPHETAMINE_CODE=0 ;
-	if &code  in: (&ILLICIT_MDMA_CODE) AND &codesys_name =&searching_text  
+	if &code  in (&ILLICIT_MDMA_CODE) AND &codesys_name =&searching_text  
 		THEN  ILLICIT_MDMA_CODE=1 ; 
 			else ILLICIT_MDMA_CODE=0 ;
-	if &code  in: (&OPIOID_MISUSE_CODE) AND &codesys_name =&searching_text 
+	if &code  in (&OPIOID_MISUSE_CODE) AND &codesys_name =&searching_text 
 		THEN  OPIOID_MISUSE_CODE=1 ; 
 			else OPIOID_MISUSE_CODE=0 ;
-	if &code  in: (&OPIOID_ILLICIT_CODE) AND &codesys_name =&searching_text
+	if &code  in (&OPIOID_ILLICIT_CODE) AND &codesys_name =&searching_text
 		THEN  OPIOID_ILLICIT_CODE=1 ; 
 			else OPIOID_ILLICIT_CODE=0 ;
-	if &code  in: (&OPIOID_NON_TX_UNSP_CODE) AND &codesys_name = &searching_text
+	if &code  in (&OPIOID_NON_TX_UNSP_CODE) AND &codesys_name = &searching_text
 		THEN  OPIOID_NON_TX_UNSP_CODE=1 ; 
 			else OPIOID_NON_TX_UNSP_CODE=0 ;
 %end;
@@ -568,4 +568,5 @@ run;
 	codesys_name =  NULL,
 	searching_text =  NULL 
 	);
+
 
