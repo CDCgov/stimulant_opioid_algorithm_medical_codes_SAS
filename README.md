@@ -8,7 +8,16 @@
 
 ## Overview
 
-<ins> Placeholder for Errata <ins>
+<ins> Errata <ins>
+
+Prior to the December 17, 2025 update of this repository, the SAS code search found any code that began with the same characters in the Code_mapping_Github.xlsx file rather than finding an exact match. For example, the RxNorm code “725”, which indicates “amphetamine”, would have allowed an incorrect match to RxNorm code “7258”, which indicates “naproxen sodium”. This error has been corrected with this code update so that only exact matches are allowed.
+
+Additionally, the following ICD-10-CM codes in the Code_Mapping_Github.xlsx have been updated:
+
+   * Value for R781 in variable OPIOID_NON_TX_UNSP_CODE updated from 0 to 1
+   * Value for T405 in variable STIM_ANY_NON_TX_CODE updated from 0 to 1 
+   * Value for T405X in variable STIM_ANY_NON_TX_CODE updated from 0 to 1
+   * Value for T4365 in variable STIM_ANY_NON_TX_CODE updated from 0 to 1
 
 <ins> Background </ins>
 
